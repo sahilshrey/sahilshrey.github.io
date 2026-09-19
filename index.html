@@ -40,7 +40,45 @@ h1 {
   color: #666;
   margin-bottom: 25px;
 }
+/* Dark / Light Mode */
 
+body.light-mode .card {
+  background: #ffffff;
+  color: #111111;
+}
+
+body.light-mode .subtitle {
+  color: #666666;
+}
+
+body.dark-mode .card {
+  background: #151515;
+  color: #ffffff;
+}
+
+body.dark-mode .subtitle {
+  color: #bbbbbb;
+}
+
+body.dark-mode h1,
+body.dark-mode h2 {
+  color: #ffffff;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 15px;
+  font-size: 15px;
+  cursor: pointer;
+  background: rgba(20,20,20,0.85);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+}
 a {
   display: block;
   text-decoration: none;
@@ -144,7 +182,9 @@ body {
 </head>
 
 <body>
-
+<button class="theme-toggle" onclick="toggleTheme()">
+  🌙 Dark Mode
+</button>
 <div class="card">
 
 <h1>SAHIL SHREY</h1>
@@ -491,6 +531,24 @@ function toggleBgMenu() {
 
 createObjects();
 animate();
+    function toggleTheme() {
+  document.body.classList.toggle("dark-mode");
+
+  const button = document.querySelector(".theme-toggle");
+
+  if (document.body.classList.contains("dark-mode")) {
+    button.innerHTML = "☀️ Light Mode";
+    localStorage.setItem("sahilTheme", "dark");
+  } else {
+    button.innerHTML = "🌙 Dark Mode";
+    localStorage.setItem("sahilTheme", "light");
+  }
+}
+
+if (localStorage.getItem("sahilTheme") === "dark") {
+  document.body.classList.add("dark-mode");
+  document.querySelector(".theme-toggle").innerHTML = "☀️ Light Mode";
+}
             </script>
 </body>
 </html>
