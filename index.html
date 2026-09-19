@@ -66,6 +66,80 @@ a {
   background:#f1f1f1;
   color:#111;
 }
+  /* ===== ANIMATED BACKGROUND SYSTEM ===== */
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: #05070d;
+}
+
+/* Animation canvas */
+#bgCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Keep your profile card above the animation */
+.card {
+  position: relative;
+  z-index: 2;
+}
+
+/* Background selector */
+.bg-controls {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+}
+
+.bg-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(15, 18, 30, 0.82);
+  color: white;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.25);
+}
+
+.bg-menu {
+  display: none;
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 15px;
+  background: rgba(10, 12, 20, 0.92);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.bg-menu.show {
+  display: block;
+}
+
+.bg-menu button {
+  display: block;
+  width: 155px;
+  margin: 4px 0;
+  padding: 9px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,.10);
+  color: white;
+  cursor: pointer;
+}
+
+.bg-menu button:active {
+  transform: scale(.97);
+}
 </style>
 </head>
 
@@ -118,6 +192,293 @@ href="https://open.spotify.com/playlist/6HFgfsDoX0QOgtMepo9UbY?si=95Beg1ZpQlyJRd
 </a>
 
 </div>
+<!-- Animated Background Controls -->
 
+<canvas id="bgCanvas"></canvas>
+
+<div class="bg-controls">
+  <button class="bg-btn" onclick="toggleBgMenu()">
+    🎨 Background
+  </button>
+
+  <div class="bg-menu" id="bgMenu">
+    <button onclick="setBackground('particles')">✨ Particles</button>
+    <button onclick="setBackground('stars')">🌌 Starfield</button>
+    <button onclick="setBackground('aurora')">🌊 Aurora</button>
+    <button onclick="setBackground('neon')">💜 Neon Waves</button>
+    <button onclick="setBackground('rain')">🌧️ Rain</button>
+    <button onclick="setBackground('meteors')">☄️ Meteor Shower</button>
+  </div>
+</div>
+  <script>
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
+
+let currentBackground =
+  localStorage.getItem("sahilBackground") || "particles";
+
+let objects = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+function random(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function createObjects() {
+  objects = [];
+
+  let count = 80;
+
+  if (currentBackground === "stars") count = 130;
+  if (currentBackground === "rain") count = 110;
+  if (currentBackground === "meteors") count = 25;
+
+  for (let i = 0; i < count; i++) {
+    objects.push({
+      x: random(0, canvas.width),
+      y: random(0, canvas.height),
+      size: random(1, 3),
+      speed: random(0.3, 1.5),
+      alpha: random(0.25, 0.9),
+      length: random(20, 70)
+    });
+  }
+}
+
+/* ✨ PARTICLES */
+
+function drawParticles() {
+  objects.forEach(p => {
+    p.y -= p.speed;
+
+    if (p.y < -10) {
+      p.y = canvas.height + 10;
+      p.x = random(0, canvas.width);
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle =
+      `rgba(80,190,255,${p.alpha})`;
+    ctx.fill();
+  });
+}
+
+/* 🌌 STARFIELD */
+
+function drawStars() {
+  objects.forEach(s => {
+    s.y += s.speed * 0.25;
+
+    if (s.y > canvas.height) {
+      s.y = 0;
+    }
+
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+    ctx.fillStyle =
+      `rgba(255,255,255,${s.alpha})`;
+    ctx.fill();
+  });
+}
+
+/* 🌊 AURORA */
+
+function drawAurora() {
+  const time = Date.now() / 1800;
+
+  for (let i = 0; i < 3; i++) {
+    ctx.beginPath();
+
+    for (let x = 0; x <= canvas.width; x += 10) {
+
+      const y =
+        canvas.height * 0.35 +
+        Math.sin(x / 130 + time + i) * 80 +
+        Math.sin(x / 60 + time) * 25;
+
+      if (x === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    }
+
+    ctx.strokeStyle =
+      `hsla(${170 + i * 70},100%,65%,0.12)`;
+
+    ctx.lineWidth = 80;
+    ctx.stroke();
+  }
+}
+
+/* 💜 NEON WAVES */
+
+function drawNeon() {
+  const time = Date.now() / 900;
+
+  for (let i = 0; i < 3; i++) {
+
+    ctx.beginPath();
+
+    for (let x = 0; x <= canvas.width; x += 10) {
+
+      const y =
+        canvas.height / 2 +
+        Math.sin(x / 100 + time + i) * 100;
+
+      if (x === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    }
+
+    ctx.strokeStyle =
+      `hsla(${200 + i * 45},100%,65%,0.15)`;
+
+    ctx.lineWidth = 5;
+    ctx.stroke();
+  }
+}
+
+/* 🌧️ RAIN */
+
+function drawRain() {
+
+  objects.forEach(r => {
+
+    r.y += r.speed * 8;
+
+    if (r.y > canvas.height) {
+      r.y = -50;
+      r.x = random(0, canvas.width);
+    }
+
+    ctx.beginPath();
+
+    ctx.moveTo(r.x, r.y);
+    ctx.lineTo(
+      r.x - 2,
+      r.y + r.length
+    );
+
+    ctx.strokeStyle =
+      `rgba(100,180,255,${r.alpha})`;
+
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+}
+
+/* ☄️ METEORS */
+
+function drawMeteors() {
+
+  objects.forEach(m => {
+
+    m.x += m.speed * 4;
+    m.y += m.speed * 2;
+
+    if (
+      m.x > canvas.width + 100 ||
+      m.y > canvas.height + 100
+    ) {
+      m.x = random(-300, canvas.width);
+      m.y = random(-300, 0);
+    }
+
+    ctx.beginPath();
+
+    ctx.moveTo(m.x, m.y);
+
+    ctx.lineTo(
+      m.x - m.length,
+      m.y - m.length * 0.5
+    );
+
+    ctx.strokeStyle =
+      `rgba(255,255,255,${m.alpha})`;
+
+    ctx.lineWidth = m.size;
+    ctx.stroke();
+  });
+}
+
+/* 🎨 MAIN ANIMATION */
+
+function animate() {
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  if (currentBackground === "particles") {
+    drawParticles();
+  }
+
+  if (currentBackground === "stars") {
+    drawStars();
+  }
+
+  if (currentBackground === "aurora") {
+    drawAurora();
+  }
+
+  if (currentBackground === "neon") {
+    drawNeon();
+  }
+
+  if (currentBackground === "rain") {
+    drawRain();
+  }
+
+  if (currentBackground === "meteors") {
+    drawMeteors();
+  }
+
+  requestAnimationFrame(animate);
+}
+
+/* 🎨 CHANGE BACKGROUND */
+
+function setBackground(type) {
+
+  currentBackground = type;
+
+  localStorage.setItem(
+    "sahilBackground",
+    type
+  );
+
+  createObjects();
+
+  document
+    .getElementById("bgMenu")
+    .classList.remove("show");
+}
+
+/* 🎨 OPEN/CLOSE MENU */
+
+function toggleBgMenu() {
+
+  document
+    .getElementById("bgMenu")
+    .classList.toggle("show");
+}
+
+createObjects();
+animate();
+            </script>
 </body>
 </html>
