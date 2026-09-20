@@ -671,10 +671,9 @@ animate();
     localStorage.setItem("sahilTheme", "light");
   }
 }
-
-if (localStorage.getItem("sahilTheme") === "dark") {
-  document.body.classList.add("dark-mode");
-  document.querySelector(".theme-toggle").innerHTML = "☀️ Light Mode";
+if (localStorage.getItem("sahilTheme") !== "light") {
+    document.body.classList.add("dark-mode");
+    document.querySelector(".theme-toggle").innerHTML = "☀️ Light Mode";
 }
             </script>
 </body>
