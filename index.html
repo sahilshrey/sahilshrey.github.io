@@ -46,10 +46,23 @@ body {
     -webkit-backdrop-filter: blur(8px);
 }
 
-
 h1 {
-  margin: 5px 0 8px;
-  font-size: 32px;
+    margin: 5px 0 8px;
+    font-size: 32px;
+
+    background: linear-gradient(90deg, #2563eb, #7c3aed, #db2777);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow: 0 0 18px rgba(124, 58, 237, 0.25);
+}
+
+  .spotify-player h2 {
+    background: linear-gradient(90deg, #2563eb, #7c3aed, #db2777);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow: 0 0 16px rgba(124, 58, 237, 0.22);
 }
 
 .subtitle {
@@ -83,7 +96,7 @@ body.dark-mode .subtitle {
 
 body.dark-mode h1,
 body.dark-mode h2 {
-  color: #ffffff;
+  color: transparent;
 }
 
 .theme-toggle {
