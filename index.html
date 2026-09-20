@@ -21,7 +21,7 @@ body {
   padding: 25px;
 }
 
-  .card {
+.card {
     width: 100%;
     max-width: 430px;
 
@@ -46,6 +46,7 @@ body {
     -webkit-backdrop-filter: blur(8px);
 }
 
+
 h1 {
   margin: 5px 0 8px;
   font-size: 32px;
@@ -58,8 +59,14 @@ h1 {
 /* Dark / Light Mode */
 
 body.light-mode .card {
-  background: #ffffff;
-  color: #111111;
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.25),
+            rgba(255, 255, 255, 0.25)
+        ),
+        url("card-bg.png") center / cover no-repeat;
+
+    color: #111111;
 }
 
 body.light-mode .subtitle {
