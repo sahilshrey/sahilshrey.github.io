@@ -311,9 +311,133 @@ body {
 .bg-menu button:active {
   transform: scale(.97);
 }
-</style>
-</head>
+  /* ================================
+   PROFILE ANIMATIONS
+================================ */
 
+/* 1. Profile photo floating */
+.profile-img {
+    animation: profileFloat 4s ease-in-out infinite;
+}
+
+@keyframes profileFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+
+/* 2. Profile photo glow pulse */
+.profile-img {
+    animation:
+        profileFloat 4s ease-in-out infinite,
+        profileGlow 3s ease-in-out infinite;
+}
+
+@keyframes profileGlow {
+    0%, 100% {
+        box-shadow: 0 0 18px rgba(124, 58, 237, 0.25);
+    }
+    50% {
+        box-shadow:
+            0 0 30px rgba(37, 99, 235, 0.55),
+            0 0 50px rgba(219, 39, 119, 0.20);
+    }
+}
+
+
+/* 3. Name entrance */
+h1 {
+    animation: nameEntrance 1s ease-out both;
+}
+
+@keyframes nameEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* 4. Button interaction */
+button,
+a {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+button:hover,
+a:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.08);
+}
+
+button:active,
+a:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+
+/* 5. Cinematic glass reflection */
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+
+    top: -120%;
+    left: -80%;
+
+    width: 45%;
+    height: 350%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.10),
+        transparent
+    );
+
+    transform: rotate(18deg);
+    pointer-events: none;
+
+    animation: glassReflection 8s ease-in-out infinite;
+}
+
+@keyframes glassReflection {
+    0%, 55% {
+        left: -80%;
+    }
+
+    75% {
+        left: 140%;
+    }
+
+    100% {
+        left: 140%;
+    }
+}
+
+
+/* Keep card content above the reflection */
+.card > * {
+    position: relative;
+    z-index: 1;
+      }
+</style>
 <body>
 <button class="theme-toggle" onclick="toggleTheme()">
   🌙 Dark Mode
@@ -681,6 +805,29 @@ if (localStorage.getItem("sahilTheme") !== "light") {
     document.body.classList.add("dark-mode");
     document.querySelector(".theme-toggle").innerHTML = "☀️ Light Mode";
 }
+    /* ================================
+   PROFILE ENTRANCE ANIMATION
+================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const card = document.querySelector(".card");
+
+    if (!card) return;
+
+    const elements = card.children;
+
+    Array.from(elements).forEach((element, index) => {
+        element.style.opacity = "0";
+        element.style.transform = "translateY(15px)";
+
+        element.style.animation =
+            `profileEntrance 0.7s ease forwards`;
+
+        element.style.animationDelay =
+            `${0.25 + index * 0.12}s`;
+    });
+});
             </script>
 </body>
 </html>
