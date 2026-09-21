@@ -98,21 +98,69 @@ body.dark-mode h1,
 body.dark-mode h2 {
   color: transparent;
 }
+/* MODERN THEME SWITCH */
+.theme-switch {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
 
-.theme-toggle {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1000;
-  border: none;
-  border-radius: 50px;
-  padding: 10px 15px;
-  font-size: 15px;
-  cursor: pointer;
-  background: rgba(20,20,20,0.85);
-  color: white;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    width: 58px;
+    height: 32px;
+
+    display: block;
+    cursor: pointer;
 }
+
+.theme-switch input {
+    display: none;
+}
+
+.theme-slider {
+    position: absolute;
+    inset: 0;
+
+    background: #4b4b4b;
+    border-radius: 50px;
+
+    box-shadow:
+        inset 0 2px 5px rgba(0,0,0,0.25),
+        0 4px 12px rgba(0,0,0,0.25);
+
+    transition: 0.3s ease;
+}
+
+.theme-icon {
+    position: absolute;
+
+    width: 26px;
+    height: 26px;
+
+    left: 3px;
+    top: 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #087cf5;
+    border-radius: 50%;
+
+    font-size: 16px;
+
+    transition: 0.3s ease;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.theme-switch input:checked + .theme-slider {
+    background: #d8d8d8;
+}
+
+.theme-switch input:checked + .theme-slider .theme-icon {
+    transform: translateX(26px);
+}
+
 a {
   display: block;
   text-decoration: none;
@@ -439,9 +487,13 @@ a:active {
       }
 </style>
 <body>
-<button class="theme-toggle" onclick="toggleTheme()">
-  🌙 Dark Mode
-</button>
+<label class="theme-switch">
+    <input type="checkbox" id="themeSwitch" onchange="toggleTheme()">
+    <span class="theme-slider">
+        <span class="theme-icon">🌙</span>
+    </span>
+</label>
+
 <div class="card">
 
 <h1>SAHIL SHREY</h1>
@@ -789,21 +841,24 @@ function toggleBgMenu() {
 createObjects();
 animate();
     function toggleTheme() {
-  document.body.classList.toggle("dark-mode");
+    document.body.classList.toggle("dark-mode");
 
-  const button = document.querySelector(".theme-toggle");
+    const switchInput = document.getElementById("themeSwitch");
 
-  if (document.body.classList.contains("dark-mode")) {
-    button.innerHTML = "☀️ Light Mode";
-    localStorage.setItem("sahilTheme", "dark");
-  } else {
-    button.innerHTML = "🌙 Dark Mode";
-    localStorage.setItem("sahilTheme", "light");
-  }
+    if (document.body.classList.contains("dark-mode")) {
+        switchInput.checked = true;
+        localStorage.setItem("sahilTheme", "dark");
+    } else {
+        switchInput.checked = false;
+        localStorage.setItem("sahilTheme", "light");
+    }
 }
+
 if (localStorage.getItem("sahilTheme") !== "light") {
     document.body.classList.add("dark-mode");
-    document.querySelector(".theme-toggle").innerHTML = "☀️ Light Mode";
+    document.getElementById("themeSwitch").checked = true;
+} else {
+    document.getElementById("themeSwitch").checked = false;
 }
     
             </script>
