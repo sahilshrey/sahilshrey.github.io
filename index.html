@@ -805,29 +805,7 @@ if (localStorage.getItem("sahilTheme") !== "light") {
     document.body.classList.add("dark-mode");
     document.querySelector(".theme-toggle").innerHTML = "☀️ Light Mode";
 }
-    /* ================================
-   PROFILE ENTRANCE ANIMATION
-================================ */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const card = document.querySelector(".card");
-
-    if (!card) return;
-
-    const elements = card.children;
-
-    Array.from(elements).forEach((element, index) => {
-        element.style.opacity = "0";
-        element.style.transform = "translateY(15px)";
-
-        element.style.animation =
-            `profileEntrance 0.7s ease forwards`;
-
-        element.style.animationDelay =
-            `${0.25 + index * 0.12}s`;
-    });
-});
+    
             </script>
 </body>
 </html>
