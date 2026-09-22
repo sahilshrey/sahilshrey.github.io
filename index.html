@@ -485,6 +485,55 @@ a:active {
     position: relative;
     z-index: 1;
       }
+  /* 🖼️ GALLERY */
+
+.gallery-section {
+    margin-top: 28px;
+    padding: 20px;
+    border-radius: 22px;
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.gallery-section h2 {
+    margin: 0 0 16px;
+    font-size: 22px;
+
+    background: linear-gradient(90deg, #2563eb, #7c3aed, #db2777);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.04);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.light-mode .gallery-section {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(0, 0, 0, 0.12);
+}
 </style>
 <body>
 <label class="theme-switch">
@@ -547,7 +596,20 @@ href="mailto:sahil.shrey121722@gmail.com">
   </iframe>
 
 </div>
+<div class="gallery-section">
 
+    <h2>🖼️ My Gallery</h2>
+
+    <div class="gallery-grid">
+
+        <img src="gallery1.jpg" alt="Sahil Gallery 1">
+        <img src="gallery2.jpg" alt="Sahil Gallery 2">
+        <img src="gallery3.jpg" alt="Sahil Gallery 3">
+        <img src="gallery4.jpg" alt="Sahil Gallery 4">
+
+    </div>
+
+</div>
 <a class="save" href="tel:9122844033">
 📇 Save Contact
 </a>
