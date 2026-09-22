@@ -563,6 +563,33 @@ box-shadow:
         profileFloat 4s ease-in-out infinite,
         profileGlow 3s ease-in-out infinite;
 }
+/* ===== PROFILE TEXT ===== */
+
+.profile-subtitle {
+    margin: 4px 0 12px;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: #e8e8ff;
+}
+
+.profile-quote {
+    max-width: 340px;
+    margin: 0 auto 18px;
+    font-size: 14px;
+    line-height: 1.6;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+body.light-mode .profile-subtitle {
+    color: #333;
+}
+
+body.light-mode .profile-quote {
+    color: #555;
+}
+  
 </style>
 <body>
 <label class="theme-switch">
@@ -574,9 +601,18 @@ box-shadow:
 
 <div class="card">
 <img src="profile.jpg" alt="Sahil Shrey" class="profile-img">
-<h1>SAHIL SHREY</h1>
-<div class="subtitle">Connect with me</div>
 
+<h1>SAHIL SHREY</h1>
+
+<div class="profile-subtitle">
+    Student • Creator • Explorer
+</div>
+
+<div class="profile-quote">
+    “Building, learning, and exploring one step at a time.”
+</div>
+
+<div class="subtitle">Connect with me</div>
 <a class="call" href="tel:9122844033">📞 Call</a>
 
 <a class="whatsapp"
