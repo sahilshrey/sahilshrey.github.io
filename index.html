@@ -191,6 +191,22 @@ a {
   background:#f1f1f1;
   color:#111;
 }
+.share-btn {
+    width: 100%;
+    margin-top: 12px;
+    padding: 15px;
+    border: none;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+
+    background: linear-gradient(90deg, #2563eb, #7c3aed, #db2777);
+    color: white;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+  
   /* ===== LIGHT / DARK BUTTON THEMES ===== */
 
 body.light-mode .snapchat {
@@ -773,7 +789,11 @@ href="mailto:sahil.shrey121722@gmail.com">
 <a class="save" href="tel:9122844033">
 📇 Save Contact
 </a>
-
+  
+<button class="share-btn" onclick="shareProfile()">
+    📤 Share My Profile
+</button>
+  
 </div>
 <!-- Animated Background Controls -->
 
@@ -1090,6 +1110,20 @@ window.addEventListener("load", function () {
         document.getElementById("loader").classList.add("hide");
     }, 1200);
 });
+  </script>
+  
+  <script>
+function shareProfile() {
+    if (navigator.share) {
+        navigator.share({
+            title: "Sahil Shrey",
+            text: "Check out Sahil Shrey's profile!",
+            url: window.location.href
+        });
+    } else {
+        alert("Copy this link to share: " + window.location.href);
+    }
+}
   </script>
 </body>
 </html>
