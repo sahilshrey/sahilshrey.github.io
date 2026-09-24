@@ -599,6 +599,24 @@ box-shadow:
     font-style: italic;
     color: rgba(255, 255, 255, 0.82);
 }
+  .visitor-counter {
+    margin: 12px auto 20px;
+    padding: 9px 16px;
+    width: fit-content;
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+    font-weight: 600;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
+  }
 
 body.light-mode .profile-subtitle {
     color: #333;
@@ -755,6 +773,10 @@ text-shadow:
 <div class="profile-quote">
     “Building, learning, and exploring one step at a time.”
 </div>
+  
+  <div class="visitor-counter">
+    📊 <span id="visitor-count">...</span> Profile Visits
+  </div>
 
 <div class="subtitle">Connect with me</div>
 <a class="call" href="tel:9122844033">📞 Call</a>
@@ -1157,6 +1179,16 @@ function shareProfile() {
         alert("Copy this link to share: " + window.location.href);
     }
 }
+  </script>
+  <script>
+fetch("https://countapi.mileshilliard.com/api/v1/hit/sahil_shrey_profile_visits")
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("visitor-count").textContent = data.value;
+    })
+    .catch(() => {
+        document.getElementById("visitor-count").textContent = "—";
+    });
   </script>
 </body>
 </html>
