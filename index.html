@@ -616,7 +616,7 @@ body.light-mode .profile-quote {
     z-index: 9999;
     background: #05060d;
     display: flex;
-    flex-direction: column;
+    
     justify-content: center;
     align-items: center;
     transition: opacity 0.8s ease, visibility 0.8s ease;
@@ -626,73 +626,75 @@ body.light-mode .profile-quote {
     opacity: 0;
     visibility: hidden;
 }
-
-.loader-logo {
-    width: 90px;
-    height: 90px;
+.loader-logo::before {
+    content: "";
+    position: absolute;
+    width: 135px;
+    height: 135px;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 55px;
-    font-weight: bold;
-    font-family: Georgia, serif;
-    color: #fff;
+    border: 2px solid transparent;
 
-    border: 3px solid transparent;
     background:
         linear-gradient(#05060d, #05060d) padding-box,
         linear-gradient(135deg, #00aaff, #8b5cf6, #ff2bd6) border-box;
 
-    box-shadow:
-        0 0 20px rgba(0, 170, 255, 0.5),
-        0 0 40px rgba(255, 43, 214, 0.25);
-
-    animation: loaderPulse 1.5s infinite alternate;
+    animation: orbitRotate 2.5s linear infinite;
 }
+.loader-logo {
+  position: relative;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 58px;
 
-.loader-name {
-    margin-top: 20px;
-    font-size: 22px;
-    letter-spacing: 4px;
-    font-weight: bold;
-    color: white;
 }
-
-.loader-line {
-    width: 120px;
-    height: 3px;
-    margin-top: 18px;
-    border-radius: 10px;
-    overflow: hidden;
-    background: rgba(255,255,255,0.15);
-}
-
-.loader-line::after {
+  .loader-logo::after {
     content: "";
-    display: block;
-    width: 40%;
-    height: 100%;
-    background: linear-gradient(90deg, #00aaff, #ff2bd6);
-    animation: loaderLine 1.2s infinite ease-in-out;
+    position: absolute;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 10px #00aaff,
+        0 0 20px #8b5cf6,
+        0 0 30px #ff2bd6;
+
+    animation: particleOrbit 2.5s linear infinite;
+  }
+  @keyframes orbitRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-@keyframes loaderPulse {
+@keyframes particleOrbit {
     from {
-        transform: scale(1);
+        transform: rotate(0deg)
+                   translateX(67px)
+                   rotate(0deg);
     }
+
     to {
-        transform: scale(1.08);
+        transform: rotate(360deg)
+                   translateX(67px)
+                   rotate(-360deg);
     }
 }
-
-@keyframes loaderLine {
-    from {
-        transform: translateX(-120%);
-    }
-    to {
-        transform: translateX(350%);
-    }
+  .loader-name,
+.loader-line {
+    display: none;
 }
 </style>
 <body>
