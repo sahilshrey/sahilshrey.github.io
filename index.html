@@ -629,13 +629,39 @@ body.light-mode .profile-quote {
 .loader-logo::before {
     content: "";
     position: absolute;
+
     width: 135px;
     height: 135px;
-    border-radius: 50%;
-    border: 2px solid transparent;
 
-    
-background: transparent;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: conic-gradient(
+        #00aaff,
+        #8b5cf6,
+        #ff2bd6,
+        #8b5cf6,
+        #00aaff
+    );
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite: xor;
+
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    mask-composite: exclude;
+
+    padding: 2px;
+
     animation: orbitRotate 2.5s linear infinite;
 }
 .loader-logo {
@@ -647,6 +673,13 @@ background: transparent;
     justify-content: center;
     align-items: center;
     font-size: 58px;
+  
+  color: #ffffff;
+
+text-shadow:
+    0 0 10px #00aaff,
+    0 0 20px #8b5cf6,
+    0 0 30px #ff2bd6;
 
 }
   .loader-logo::after {
