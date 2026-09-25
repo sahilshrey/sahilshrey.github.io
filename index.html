@@ -1213,6 +1213,20 @@ card.addEventListener("mousemove", function(e) {
         `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 });
 
+card.addEventListener("touchmove", function(e) {
+    const touch = e.touches[0];
+    const rect = card.getBoundingClientRect();
+
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+
+    const rotateY = ((x / rect.width) - 0.5) * 10;
+    const rotateX = ((y / rect.height) - 0.5) * -10;
+
+    card.style.transform =
+        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+}, { passive: true });
+    
 card.addEventListener("mouseleave", function() {
     card.style.transform =
         "perspective(900px) rotateX(0deg) rotateY(0deg)";
