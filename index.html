@@ -58,7 +58,10 @@ h1 {
 
     text-shadow: 0 0 18px rgba(124, 58, 237, 0.25);
 }
-
+h1 {
+    transform: translateZ(28px);
+    transform-style: preserve-3d;
+}
   .spotify-player h2 {
     background: linear-gradient(90deg, #2563eb, #7c3aed, #db2777);
     -webkit-background-clip: text;
@@ -66,6 +69,10 @@ h1 {
 
     text-shadow: 0 0 16px rgba(124, 58, 237, 0.22);
 }
+  .spotify-player {
+    transform: translateZ(14px);
+    transform-style: preserve-3d;
+  }
 
 .subtitle {
   color: #666;
@@ -452,6 +459,12 @@ button:active,
 a:active {
     transform: translateY(-1px) scale(0.98);
 }
+  /* 🎯 3D BUTTON DEPTH */
+button,
+a {
+    transform: translateZ(12px);
+    transform-style: preserve-3d;
+}
 
 
 /* 5. Cinematic glass reflection */
@@ -514,7 +527,10 @@ a:active {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
-
+.gallery-section {
+    transform: translateZ(16px);
+    transform-style: preserve-3d;
+}
 .gallery-section h2 {
     margin: 0 0 16px;
     font-size: 22px;
@@ -580,6 +596,8 @@ box-shadow:
     animation:
         profileFloat 4s ease-in-out infinite,
         profileGlow 3s ease-in-out infinite;
+      transform: translateZ(35px);
+    transform-style: preserve-3d;
 }
 /* ===== PROFILE TEXT ===== */
 
@@ -590,7 +608,15 @@ box-shadow:
     letter-spacing: 1.2px;
     color: #e8e8ff;
 }
+.profile-subtitle {
+    transform: translateZ(22px);
+    transform-style: preserve-3d;
+}
 
+.profile-quote {
+    transform: translateZ(18px);
+    transform-style: preserve-3d;
+}
 .profile-quote {
     max-width: 340px;
     margin: 0 auto 18px;
@@ -616,6 +642,10 @@ box-shadow:
     -webkit-backdrop-filter: blur(10px);
 
     box-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
+  }
+  .visitor-counter {
+    transform: translateZ(10px);
+    transform-style: preserve-3d;
   }
 
 body.light-mode .profile-subtitle {
