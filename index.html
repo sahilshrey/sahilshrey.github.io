@@ -466,6 +466,11 @@ a {
     transform-style: preserve-3d;
 }
 
+  /* 🧲 MAGNETIC BUTTONS */
+button,
+a {
+    will-change: transform;
+}
 
 /* 5. Cinematic glass reflection */
 .card {
@@ -1261,6 +1266,39 @@ card.addEventListener("mouseleave", function() {
     card.style.transform =
         "perspective(900px) rotateX(0deg) rotateY(0deg)";
 });
+    
+const magneticElements = document.querySelectorAll("a, button");
+
+magneticElements.forEach(element => {
+    element.addEventListener("mousemove", function(e) {
+        const rect = element.getBoundingClientRect();
+
+        const x = e.clientX - (rect.left + rect.width / 2);
+        const y = e.clientY - (rect.top + rect.height / 2);
+
+        element.style.transform =
+            `translate(${x * 0.15}px, ${y * 0.15}px) translateZ(12px)`;
+    });
+
+    element.addEventListener("mouseleave", function() {
+        element.style.transform = "translate(0, 0) translateZ(12px)";
+    });
+  element.addEventListener("touchmove", function(e) {
+    const touch = e.touches[0];
+    const rect = element.getBoundingClientRect();
+
+    const x = touch.clientX - (rect.left + rect.width / 2);
+    const y = touch.clientY - (rect.top + rect.height / 2);
+
+    element.style.transform =
+        `translate(${x * 0.08}px, ${y * 0.08}px) translateZ(12px)`;
+}, { passive: true });
+
+element.addEventListener("touchend", function() {
+    element.style.transform = "translate(0, 0) translateZ(12px)";
+});
+});
+
   </script>
 </body>
 </html>
