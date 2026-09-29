@@ -786,6 +786,25 @@ text-shadow:
     transition: transform 0.15s ease-out;
     will-change: transform;
 }
+/* ✨ CURSOR GLOW */
+.card {
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    background: radial-gradient(
+        circle at var(--mouse-x) var(--mouse-y),
+        rgba(255,255,255,0.16),
+        transparent 35%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
   
 </style>
 <body>
@@ -1234,6 +1253,27 @@ fetch("https://countapi.mileshilliard.com/api/v1/hit/sahil_shrey_profile_visits"
   </script>
   <script>
 const card = document.querySelector(".card");
+
+    card.addEventListener("mousemove", function(e) {
+    const rect = card.getBoundingClientRect();
+
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+    card.style.setProperty("--mouse-x", `${x}%`);
+    card.style.setProperty("--mouse-y", `${y}%`);
+});
+
+card.addEventListener("touchmove", function(e) {
+    const touch = e.touches[0];
+    const rect = card.getBoundingClientRect();
+
+    const x = ((touch.clientX - rect.left) / rect.width) * 100;
+    const y = ((touch.clientY - rect.top) / rect.height) * 100;
+
+    card.style.setProperty("--mouse-x", `${x}%`);
+    card.style.setProperty("--mouse-y", `${y}%`);
+});
 
 card.addEventListener("mousemove", function(e) {
     const rect = card.getBoundingClientRect();
