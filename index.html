@@ -805,6 +805,78 @@ text-shadow:
     pointer-events: none;
     z-index: 0;
 }
+/* 🎬 CINEMATIC PROFILE REVEAL */
+
+.card > * {
+    opacity: 0;
+    animation: cinematicReveal 0.8s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.card > .profile-img {
+    animation-delay: 0.35s;
+}
+
+.card > h1 {
+    animation-delay: 0.55s;
+}
+
+.card > .profile-subtitle {
+    animation-delay: 0.70s;
+}
+
+.card > .profile-quote {
+    animation-delay: 0.85s;
+}
+
+.card > .visitor-counter {
+    animation-delay: 1s;
+}
+
+.card > .subtitle {
+    animation-delay: 1.15s;
+}
+
+.card > a {
+    animation-delay: 1.30s;
+}
+
+.card > .spotify-player {
+    animation-delay: 2.05s;
+}
+
+.card > .gallery-section {
+    animation-delay: 2.20s;
+}
+
+.card > .save {
+    animation-delay: 2.35s;
+}
+
+.card > .share-btn {
+    animation-delay: 2.50s;
+}
+
+@keyframes cinematicReveal {
+    from {
+        opacity: 0;
+        transform: translateY(28px) scale(.96);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card > * {
+        opacity: 1;
+        animation: none;
+    }
+}
+
   
 </style>
 <body>
