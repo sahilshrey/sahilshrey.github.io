@@ -144,7 +144,20 @@ h1 {
         transform 0.35s ease,
         box-shadow 0.35s ease;
 }
+.spotify-player {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
 
+.spotify-player:hover {
+    transform: translateZ(18px) translateY(-3px);
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,0.30),
+        0 0 28px rgba(29,185,84,0.10),
+        inset 0 0 24px rgba(255,255,255,0.06);
+}
 .spotify-player iframe:hover {
     transform: scale(1.015);
 
