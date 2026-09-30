@@ -158,6 +158,31 @@ h1 {
         0 0 28px rgba(29,185,84,0.10),
         inset 0 0 24px rgba(255,255,255,0.06);
 }
+  .spotify-player::before {
+    content: "";
+    position: absolute;
+    top: -60%;
+    left: -80%;
+
+    width: 60%;
+    height: 220%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.10),
+        transparent
+    );
+
+    transform: rotate(20deg);
+    pointer-events: none;
+
+    transition: left 0.8s ease;
+}
+
+.spotify-player:hover::before {
+    left: 120%;
+}
 .spotify-player iframe:hover {
     transform: scale(1.015);
 
