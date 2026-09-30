@@ -808,15 +808,71 @@ text-shadow:
 
 /* 🎬 CINEMATIC PROFILE REVEAL */
 
-.card {
-    animation: cardCinematic 1s ease-out both;
+.card > * {
+    opacity: 0;
+    animation: cinematicItem 0.8s cubic-bezier(.22,1,.36,1) forwards;
 }
 
-@keyframes cardCinematic {
+/* Profile photo */
+.card > .profile-img {
+    animation-delay: 0.20s;
+}
+
+/* Name */
+.card > h1 {
+    animation-delay: 0.40s;
+}
+
+/* Subtitle */
+.card > .profile-subtitle {
+    animation-delay: 0.60s;
+}
+
+/* Quote */
+.card > .profile-quote {
+    animation-delay: 0.80s;
+}
+
+/* Visitor counter */
+.card > .visitor-counter {
+    animation-delay: 1.00s;
+}
+
+/* Connect with me */
+.card > .subtitle {
+    animation-delay: 1.20s;
+}
+
+/* Social buttons */
+.card > a {
+    animation-delay: 1.35s;
+}
+
+/* Spotify */
+.card > .spotify-player {
+    animation-delay: 2.10s;
+}
+
+/* Gallery */
+.card > .gallery-section {
+    animation-delay: 2.30s;
+}
+
+/* Save contact */
+.card > .save {
+    animation-delay: 2.50s;
+}
+
+/* Share button */
+.card > .share-btn {
+    animation-delay: 2.70s;
+}
+
+@keyframes cinematicItem {
     from {
         opacity: 0;
-        transform: translateY(35px) scale(0.97);
-        filter: blur(6px);
+        transform: translateY(28px) scale(0.96);
+        filter: blur(8px);
     }
 
     to {
@@ -826,28 +882,9 @@ text-shadow:
     }
 }
 
-.card .profile-img {
-    animation-delay: 0.2s;
-}
-
-.card h1 {
-    animation-delay: 0.35s;
-}
-
-.card .profile-subtitle {
-    animation-delay: 0.50s;
-}
-
-.card .profile-quote {
-    animation-delay: 0.65s;
-}
-
-.card .visitor-counter {
-    animation-delay: 0.80s;
-}
-
 @media (prefers-reduced-motion: reduce) {
-    .card {
+    .card > * {
+        opacity: 1;
         animation: none;
     }
 }
