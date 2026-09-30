@@ -1034,6 +1034,32 @@ text-shadow:
         transform: scale(1.015);
     }
 }
+
+.spotify-player {
+    opacity: 0;
+    animation: spotifyEntrance 0.9s cubic-bezier(.22,1,.36,1) 1.4s forwards;
+}
+
+@keyframes spotifyEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(24px) translateZ(14px) scale(0.98);
+        filter: blur(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) translateZ(14px) scale(1);
+        filter: blur(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .spotify-player {
+        opacity: 1;
+        animation: none;
+    }
+}
   
 </style>
 <body>
