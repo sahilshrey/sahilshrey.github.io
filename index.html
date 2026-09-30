@@ -205,9 +205,14 @@ h1 {
 }
 .spotify-player iframe {
     display: block;
-
     border: 1px solid rgba(29, 185, 84, 0.25);
+.spotify-player iframe:focus {
+    outline: none;
 
+    box-shadow:
+        0 0 0 2px rgba(29,185,84,0.22),
+        0 12px 30px rgba(0,0,0,0.32);
+}
     box-shadow:
         0 8px 24px rgba(0,0,0,0.28),
         0 0 18px rgba(29,185,84,0.10);
