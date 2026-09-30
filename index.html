@@ -69,10 +69,33 @@ h1 {
 
     text-shadow: 0 0 16px rgba(124, 58, 237, 0.22);
 }
+
   .spotify-player {
+    margin-top: 24px;
+    padding: 18px;
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.10),
+            rgba(255,255,255,0.03)
+        );
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.25),
+        inset 0 0 20px rgba(255,255,255,0.05);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
     transform: translateZ(14px);
     transform-style: preserve-3d;
-  }
+
+    overflow: hidden;
+}
 
 .subtitle {
   color: #666;
