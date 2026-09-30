@@ -806,72 +806,22 @@ text-shadow:
     z-index: 0;
 }
 
-/* 🎬 CINEMATIC PROFILE REVEAL */
+/* 🎬 FINAL CINEMATIC REVEAL */
 
-.card > * {
+.cinematic-item {
     opacity: 0;
-    animation: cinematicItem 0.8s cubic-bezier(.22,1,.36,1) forwards;
+    transform: translateY(28px) scale(0.97);
+    filter: blur(8px);
 }
 
-/* Profile photo */
-.card > .profile-img {
-    animation-delay: 0.20s;
+.cinematic-item.cinematic-show {
+    animation: cinematicReveal 0.75s cubic-bezier(.22,1,.36,1) forwards;
 }
 
-/* Name */
-.card > h1 {
-    animation-delay: 0.40s;
-}
-
-/* Subtitle */
-.card > .profile-subtitle {
-    animation-delay: 0.60s;
-}
-
-/* Quote */
-.card > .profile-quote {
-    animation-delay: 0.80s;
-}
-
-/* Visitor counter */
-.card > .visitor-counter {
-    animation-delay: 1.00s;
-}
-
-/* Connect with me */
-.card > .subtitle {
-    animation-delay: 1.20s;
-}
-
-/* Social buttons */
-.card > a {
-    animation-delay: 1.35s;
-}
-
-/* Spotify */
-.card > .spotify-player {
-    animation-delay: 2.10s;
-}
-
-/* Gallery */
-.card > .gallery-section {
-    animation-delay: 2.30s;
-}
-
-/* Save contact */
-.card > .save {
-    animation-delay: 2.50s;
-}
-
-/* Share button */
-.card > .share-btn {
-    animation-delay: 2.70s;
-}
-
-@keyframes cinematicItem {
+@keyframes cinematicReveal {
     from {
         opacity: 0;
-        transform: translateY(28px) scale(0.96);
+        transform: translateY(28px) scale(0.97);
         filter: blur(8px);
     }
 
@@ -883,8 +833,13 @@ text-shadow:
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .card > * {
+    .cinematic-item {
         opacity: 1;
+        transform: none;
+        filter: none;
+    }
+
+    .cinematic-item.cinematic-show {
         animation: none;
     }
 }
@@ -1424,5 +1379,38 @@ element.addEventListener("touchend", function() {
 });
 
   </script>
+
+<script>
+window.addEventListener("load", function () {
+
+    setTimeout(function () {
+
+        const cinematicItems = [
+            document.querySelector(".profile-img"),
+            document.querySelector("h1"),
+            document.querySelector(".profile-subtitle"),
+            document.querySelector(".profile-quote"),
+            document.querySelector(".visitor-counter"),
+            document.querySelector(".subtitle"),
+            ...document.querySelectorAll(".card > a"),
+            document.querySelector(".spotify-player"),
+            document.querySelector(".gallery-section"),
+            document.querySelector(".save"),
+            document.querySelector(".share-btn")
+        ].filter(Boolean);
+
+        cinematicItems.forEach(function (element, index) {
+            element.classList.add("cinematic-item");
+
+            setTimeout(function () {
+                element.classList.add("cinematic-show");
+            }, index * 150);
+        });
+
+    }, 1250);
+
+});
+</script>
+  
 </body>
 </html>
