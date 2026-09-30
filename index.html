@@ -183,6 +183,19 @@ h1 {
 .spotify-player:hover::before {
     left: 120%;
 }
+  .spotify-player::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,0.08);
+
+    pointer-events: none;
+
+    box-shadow:
+        inset 0 0 30px rgba(255,255,255,0.03);
+  }
 .spotify-player iframe:hover {
     transform: scale(1.015);
 
