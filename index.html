@@ -991,7 +991,7 @@ text-shadow:
     }
 }
 
-  @media (max-width: 600px) {
+@media (max-width: 600px) {
     .spotify-player {
         margin-top: 20px;
         padding: 14px;
@@ -1001,7 +1001,21 @@ text-shadow:
     .spotify-player h2 {
         font-size: 20px;
     }
-  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .spotify-player:hover {
+        transform: translateZ(14px);
+    }
+
+    .spotify-player:hover::before {
+        left: -80%;
+    }
+
+    .spotify-player:hover h2 {
+        transform: none;
+    }
+}
   
 </style>
 <body>
