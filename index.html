@@ -1016,6 +1016,24 @@ text-shadow:
         transform: none;
     }
 }
+
+@media (hover: hover) and (pointer: fine) {
+    .spotify-player:hover {
+        transform: translateZ(18px) translateY(-3px);
+    }
+
+    .spotify-player:hover::before {
+        left: 120%;
+    }
+
+    .spotify-player:hover h2 {
+        transform: translateY(-2px);
+    }
+
+    .spotify-player iframe:hover {
+        transform: scale(1.015);
+    }
+}
   
 </style>
 <body>
