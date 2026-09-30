@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,11 +64,27 @@ h1 {
     transform-style: preserve-3d;
 }
   .spotify-player h2 {
+    position: relative;
+
     background: linear-gradient(90deg, #2563eb, #7c3aed, #db2777);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    text-shadow: 0 0 16px rgba(124, 58, 237, 0.22);
+    text-shadow:
+        0 0 12px rgba(29,185,84,0.18),
+        0 0 24px rgba(124,58,237,0.18);
+
+    transition:
+        transform 0.35s ease,
+        text-shadow 0.35s ease;
+}
+
+.spotify-player:hover h2 {
+    transform: translateY(-2px);
+
+    text-shadow:
+        0 0 16px rgba(29,185,84,0.25),
+        0 0 28px rgba(124,58,237,0.22);
 }
 
   .spotify-player {
