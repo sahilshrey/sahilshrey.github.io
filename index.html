@@ -96,6 +96,19 @@ h1 {
 
     overflow: hidden;
 }
+  .spotify-player iframe {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.spotify-player iframe:hover {
+    transform: scale(1.015);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.32),
+        0 0 24px rgba(29,185,84,0.16);
+}
 .spotify-player iframe {
     display: block;
 
