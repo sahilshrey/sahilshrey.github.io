@@ -86,7 +86,33 @@ h1 {
         0 0 16px rgba(29,185,84,0.25),
         0 0 28px rgba(124,58,237,0.22);
 }
+.spotify-player h2::after {
+    content: "";
+    display: inline-block;
 
+    width: 7px;
+    height: 7px;
+    margin-left: 9px;
+
+    background: #1db954;
+    border-radius: 50%;
+
+    box-shadow: 0 0 10px rgba(29,185,84,0.8);
+
+    animation: spotifyPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes spotifyPulse {
+    0%, 100% {
+        opacity: 0.45;
+        transform: scale(0.85);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
   .spotify-player {
     margin-top: 24px;
     padding: 18px;
