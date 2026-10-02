@@ -1627,6 +1627,248 @@ window.addEventListener("load", function () {
 
 });
 </script>
+
+
+<!-- SAHIL'S SECRET EASTER EGG -->
+<style>
+    #sahil-secret-room[hidden] {
+        display: none !important;
+    }
+
+    #sahil-secret-room {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 22px;
+        background: rgba(4, 7, 20, 0.78);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        animation: sahilSecretFade 0.35s ease;
+    }
+
+    .sahil-secret-card {
+        position: relative;
+        width: 100%;
+        max-width: 390px;
+        padding: 38px 25px 30px;
+        overflow: hidden;
+        text-align: center;
+        color: #f8f7ff;
+        background: linear-gradient(
+            145deg,
+            rgba(42, 48, 79, 0.94),
+            rgba(14, 17, 37, 0.97)
+        );
+        border: 1px solid rgba(205, 190, 255, 0.3);
+        border-radius: 26px;
+        box-shadow:
+            0 0 45px rgba(147, 115, 255, 0.22),
+            0 25px 80px rgba(0, 0, 0, 0.45);
+        animation: sahilSecretReveal 0.5s ease;
+    }
+
+    .sahil-secret-card::before {
+        content: "";
+        position: absolute;
+        top: -75px;
+        left: 50%;
+        width: 180px;
+        height: 180px;
+        transform: translateX(-50%);
+        background: rgba(168, 143, 255, 0.17);
+        filter: blur(35px);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .sahil-secret-close {
+        position: absolute;
+        top: 12px;
+        right: 14px;
+        width: 36px;
+        height: 36px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        color: white;
+        background: rgba(255, 255, 255, 0.08);
+        font-size: 22px;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.2s;
+    }
+
+    .sahil-secret-close:hover {
+        background: rgba(255, 255, 255, 0.18);
+        transform: rotate(90deg);
+    }
+
+    .sahil-secret-moon {
+        position: relative;
+        margin-bottom: 17px;
+        font-size: 55px;
+        filter: drop-shadow(0 0 18px rgba(202, 190, 255, 0.6));
+        animation: sahilMoonFloat 3s ease-in-out infinite;
+    }
+
+    .sahil-secret-label {
+        position: relative;
+        margin: 0 0 12px;
+        color: #c9baff;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+
+    .sahil-secret-message {
+        position: relative;
+        margin: 0;
+        font-size: clamp(21px, 5vw, 27px);
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: 0.2px;
+        background: linear-gradient(110deg, #ffffff, #d6c8ff, #ffffff);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .sahil-secret-footer {
+        position: relative;
+        margin: 20px 0 0;
+        color: rgba(230, 226, 255, 0.62);
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+    @keyframes sahilSecretFade {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes sahilSecretReveal {
+        from {
+            opacity: 0;
+            transform: translateY(18px) scale(0.94);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    @keyframes sahilMoonFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-7px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        #sahil-secret-room,
+        .sahil-secret-card,
+        .sahil-secret-moon {
+            animation: none !important;
+        }
+
+        .sahil-secret-close {
+            transition: none !important;
+        }
+    }
+</style>
+
+<div
+    id="sahil-secret-room"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="sahil-secret-message"
+    aria-describedby="sahil-secret-footer"
+>
+    <div class="sahil-secret-card">
+        <button
+            class="sahil-secret-close"
+            id="sahil-secret-close"
+            type="button"
+            aria-label="Close secret room"
+        >×</button>
+
+        <div class="sahil-secret-moon" aria-hidden="true">🌙</div>
+
+        <p class="sahil-secret-label">A little secret by Sahil</p>
+
+        <p
+            class="sahil-secret-message"
+            id="sahil-secret-message"
+        >Some things are meant to be discovered, not explained. 🌙</p>
+
+        <p class="sahil-secret-footer" id="sahil-secret-footer">
+            ✦ You found what was hidden ✦
+        </p>
+    </div>
+</div>
+
+<script>
+(function () {
+    const profilePhoto = document.querySelector(".profile-img");
+    const secretRoom = document.getElementById("sahil-secret-room");
+    const closeButton = document.getElementById("sahil-secret-close");
+
+    if (!profilePhoto || !secretRoom || !closeButton) return;
+
+    let tapCount = 0;
+    let resetTimer = null;
+    let roomOpen = false;
+
+    function openSecretRoom() {
+        if (roomOpen) return;
+
+        roomOpen = true;
+        secretRoom.hidden = false;
+        closeButton.focus();
+    }
+
+    function closeSecretRoom() {
+        secretRoom.hidden = true;
+        roomOpen = false;
+        profilePhoto.focus({ preventScroll: true });
+    }
+
+    profilePhoto.addEventListener("click", function () {
+        if (roomOpen) return;
+
+        tapCount += 1;
+
+        clearTimeout(resetTimer);
+
+        if (tapCount >= 5) {
+            tapCount = 0;
+            openSecretRoom();
+            return;
+        }
+
+        resetTimer = setTimeout(function () {
+            tapCount = 0;
+        }, 2500);
+    });
+
+    closeButton.addEventListener("click", closeSecretRoom);
+
+    secretRoom.addEventListener("click", function (event) {
+        if (event.target === secretRoom) {
+            closeSecretRoom();
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && roomOpen) {
+            closeSecretRoom();
+        }
+    });
+})();
+</script>
+<!-- END SAHIL'S SECRET EASTER EGG -->
+  
   
 </body>
 </html>
