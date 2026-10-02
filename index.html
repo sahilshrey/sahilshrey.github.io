@@ -1628,14 +1628,15 @@ window.addEventListener("load", function () {
 });
 </script>
 
-
-<!-- SAHIL'S SECRET EASTER EGG -->
+<!-- SAHIL'S PREMIUM SECRET EASTER EGG -->
 <style>
     #sahil-secret-room[hidden] {
         display: none !important;
     }
 
     #sahil-secret-room {
+        --secret-lilac: #cbb8ff;
+        --secret-glow: rgba(156, 117, 255, 0.35);
         position: fixed;
         inset: 0;
         z-index: 99999;
@@ -1643,135 +1644,418 @@ window.addEventListener("load", function () {
         align-items: center;
         justify-content: center;
         padding: 22px;
-        background: rgba(4, 7, 20, 0.78);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        animation: sahilSecretFade 0.35s ease;
+        overflow: hidden;
+        background:
+            radial-gradient(ellipse at 50% 42%,
+                rgba(53, 42, 105, 0.36), transparent 55%),
+            rgba(3, 5, 17, 0.88);
+        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px);
+        animation: secretBackdropIn 0.65s ease both;
+        isolation: isolate;
+    }
+
+    /* Atmospheric star field */
+    #sahil-secret-room::before {
+        content: "";
+        position: absolute;
+        inset: -50%;
+        z-index: -1;
+        pointer-events: none;
+        background-image:
+            radial-gradient(1px 1px at 8% 18%, #fff 99%, transparent),
+            radial-gradient(2px 2px at 23% 61%, #c9baff 99%, transparent),
+            radial-gradient(1px 1px at 39% 28%, #fff 99%, transparent),
+            radial-gradient(1px 1px at 61% 75%, #fff 99%, transparent),
+            radial-gradient(2px 2px at 76% 32%, #c9baff 99%, transparent),
+            radial-gradient(1px 1px at 91% 57%, #fff 99%, transparent),
+            radial-gradient(1px 1px at 47% 91%, #fff 99%, transparent),
+            radial-gradient(2px 2px at 14% 83%, #b7a4ff 99%, transparent);
+        background-size: 340px 300px;
+        opacity: 0.6;
+        animation: secretStarsDrift 35s linear infinite;
+    }
+
+    #sahil-secret-room::after {
+        content: "";
+        position: absolute;
+        width: min(85vw, 540px);
+        aspect-ratio: 1;
+        z-index: -1;
+        pointer-events: none;
+        border-radius: 50%;
+        background: radial-gradient(
+            circle,
+            rgba(126, 91, 255, 0.13),
+            rgba(80, 101, 255, 0.045) 42%,
+            transparent 70%
+        );
+        animation: secretNebulaPulse 6s ease-in-out infinite;
     }
 
     .sahil-secret-card {
         position: relative;
+        isolation: isolate;
         width: 100%;
-        max-width: 390px;
-        padding: 38px 25px 30px;
+        max-width: 410px;
+        padding: 42px 28px 30px;
         overflow: hidden;
         text-align: center;
-        color: #f8f7ff;
-        background: linear-gradient(
-            145deg,
-            rgba(42, 48, 79, 0.94),
-            rgba(14, 17, 37, 0.97)
-        );
-        border: 1px solid rgba(205, 190, 255, 0.3);
-        border-radius: 26px;
+        color: #f8f6ff;
+        border: 1px solid rgba(218, 207, 255, 0.24);
+        border-radius: 30px;
+        background:
+            linear-gradient(145deg,
+                rgba(39, 36, 74, 0.88),
+                rgba(12, 16, 38, 0.96) 58%,
+                rgba(24, 20, 52, 0.94));
         box-shadow:
-            0 0 45px rgba(147, 115, 255, 0.22),
-            0 25px 80px rgba(0, 0, 0, 0.45);
-        animation: sahilSecretReveal 0.5s ease;
+            0 0 0 1px rgba(255, 255, 255, 0.035) inset,
+            0 0 45px rgba(132, 95, 255, 0.15),
+            0 0 110px rgba(105, 80, 255, 0.12),
+            0 35px 100px rgba(0, 0, 0, 0.55);
+        -webkit-backdrop-filter: blur(24px);
+        backdrop-filter: blur(24px);
+        animation: secretCardReveal 0.85s cubic-bezier(.16, 1, .3, 1) both;
     }
 
+    /* Fine inner glass border */
     .sahil-secret-card::before {
         content: "";
         position: absolute;
-        top: -75px;
-        left: 50%;
-        width: 180px;
-        height: 180px;
-        transform: translateX(-50%);
-        background: rgba(168, 143, 255, 0.17);
-        filter: blur(35px);
-        border-radius: 50%;
+        inset: 1px;
+        z-index: -1;
+        border-radius: 29px;
         pointer-events: none;
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.09),
+            transparent 30%,
+            transparent 72%,
+            rgba(180, 154, 255, 0.08)
+        );
+    }
+
+    /* Slow light sweep */
+    .sahil-secret-card::after {
+        content: "";
+        position: absolute;
+        top: -70%;
+        left: -85%;
+        width: 55%;
+        height: 240%;
+        z-index: 3;
+        pointer-events: none;
+        transform: rotate(24deg);
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.045),
+            transparent
+        );
+        animation: secretGlassSweep 7s ease-in-out 1s infinite;
     }
 
     .sahil-secret-close {
         position: absolute;
-        top: 12px;
-        right: 14px;
-        width: 36px;
-        height: 36px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        top: 15px;
+        right: 15px;
+        z-index: 5;
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        padding: 0;
+        border: 1px solid rgba(255, 255, 255, 0.13);
         border-radius: 50%;
-        color: white;
-        background: rgba(255, 255, 255, 0.08);
-        font-size: 22px;
+        color: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.055);
+        font: inherit;
+        font-size: 23px;
+        line-height: 1;
         cursor: pointer;
-        transition: background 0.2s, transform 0.2s;
+        transition:
+            transform 0.3s ease,
+            background 0.3s ease,
+            border-color 0.3s ease;
     }
 
     .sahil-secret-close:hover {
-        background: rgba(255, 255, 255, 0.18);
         transform: rotate(90deg);
+        background: rgba(183, 157, 255, 0.18);
+        border-color: rgba(203, 184, 255, 0.5);
+    }
+
+    .sahil-secret-close:focus-visible {
+        outline: 2px solid var(--secret-lilac);
+        outline-offset: 4px;
+    }
+
+    .sahil-secret-art {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 142px;
+        height: 142px;
+        margin: 0 auto 25px;
+    }
+
+    .sahil-secret-orbit {
+        position: absolute;
+        inset: 8px;
+        border: 1px solid rgba(198, 179, 255, 0.27);
+        border-radius: 50%;
+        transform: rotate(-28deg) scaleY(0.72);
+        box-shadow: 0 0 18px rgba(166, 133, 255, 0.08);
+    }
+
+    .sahil-secret-orbit::before {
+        content: "";
+        position: absolute;
+        top: 12%;
+        left: 14%;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #e3d8ff;
+        box-shadow: 0 0 12px #bca1ff;
+    }
+
+    .sahil-secret-orbit-two {
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(155, 139, 255, 0.16);
+        border-radius: 50%;
+        transform: rotate(35deg) scaleY(0.83);
     }
 
     .sahil-secret-moon {
         position: relative;
-        margin-bottom: 17px;
-        font-size: 55px;
-        filter: drop-shadow(0 0 18px rgba(202, 190, 255, 0.6));
-        animation: sahilMoonFloat 3s ease-in-out infinite;
+        display: grid;
+        place-items: center;
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        font-size: 52px;
+        line-height: 1;
+        background: radial-gradient(
+            circle,
+            rgba(191, 171, 255, 0.17),
+            rgba(128, 104, 224, 0.045) 70%,
+            transparent
+        );
+        filter: drop-shadow(0 0 18px rgba(191, 171, 255, 0.42));
+        animation: secretMoonFloat 4s ease-in-out infinite;
+    }
+
+    .sahil-secret-spark {
+        position: absolute;
+        color: #e5dbff;
+        font-size: 15px;
+        text-shadow: 0 0 12px rgba(205, 184, 255, 0.8);
+        animation: secretSparkle 3s ease-in-out infinite;
+    }
+
+    .sahil-secret-spark-one {
+        top: 15px;
+        right: 5px;
+    }
+
+    .sahil-secret-spark-two {
+        bottom: 18px;
+        left: 2px;
+        animation-delay: 1s;
+    }
+
+    .sahil-secret-spark-three {
+        top: 38px;
+        left: 2px;
+        font-size: 9px;
+        animation-delay: 1.7s;
     }
 
     .sahil-secret-label {
-        position: relative;
-        margin: 0 0 12px;
-        color: #c9baff;
-        font-size: 11px;
+        margin: 0 0 17px;
+        color: #c7b6ff;
+        font-size: 10px;
         font-weight: 700;
-        letter-spacing: 3px;
+        letter-spacing: 4px;
         text-transform: uppercase;
     }
 
+    .sahil-secret-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin: 0 auto 20px;
+        color: #c8b7ff;
+        font-size: 10px;
+    }
+
+    .sahil-secret-divider::before,
+    .sahil-secret-divider::after {
+        content: "";
+        width: 42px;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(193, 169, 255, 0.55)
+        );
+    }
+
+    .sahil-secret-divider::after {
+        transform: rotate(180deg);
+    }
+
     .sahil-secret-message {
-        position: relative;
         margin: 0;
-        font-size: clamp(21px, 5vw, 27px);
-        font-weight: 600;
-        line-height: 1.5;
-        letter-spacing: 0.2px;
-        background: linear-gradient(110deg, #ffffff, #d6c8ff, #ffffff);
+        font-family: inherit;
+        font-size: clamp(23px, 5.7vw, 29px);
+        font-weight: 500;
+        line-height: 1.48;
+        letter-spacing: -0.55px;
+        color: #f6f1ff;
+        text-wrap: balance;
+        text-shadow: 0 0 28px rgba(199, 176, 255, 0.1);
+    }
+
+    .sahil-secret-message span {
+        display: inline-block;
+        margin-left: 2px;
+        background: linear-gradient(135deg, #fff, #d6c4ff);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 
     .sahil-secret-footer {
-        position: relative;
-        margin: 20px 0 0;
-        color: rgba(230, 226, 255, 0.62);
-        font-size: 12px;
-        letter-spacing: 1px;
+        margin: 23px 0 0;
+        color: rgba(220, 213, 248, 0.57);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
     }
 
-    @keyframes sahilSecretFade {
+    .sahil-secret-dismiss {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        min-height: 44px;
+        margin-top: 28px;
+        padding: 0 23px;
+        border: 1px solid rgba(210, 193, 255, 0.3);
+        border-radius: 999px;
+        color: #f6f0ff;
+        background: linear-gradient(
+            135deg,
+            rgba(156, 125, 255, 0.2),
+            rgba(111, 91, 207, 0.09)
+        );
+        font: inherit;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        cursor: pointer;
+        box-shadow: 0 0 22px rgba(146, 111, 255, 0.08);
+        transition:
+            transform 0.25s ease,
+            background 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    .sahil-secret-dismiss:hover {
+        transform: translateY(-2px);
+        background: rgba(169, 139, 255, 0.24);
+        box-shadow: 0 0 28px rgba(146, 111, 255, 0.2);
+    }
+
+    .sahil-secret-dismiss:focus-visible {
+        outline: 2px solid var(--secret-lilac);
+        outline-offset: 4px;
+    }
+
+    @keyframes secretBackdropIn {
         from { opacity: 0; }
         to { opacity: 1; }
     }
 
-    @keyframes sahilSecretReveal {
-        from {
+    @keyframes secretCardReveal {
+        0% {
             opacity: 0;
-            transform: translateY(18px) scale(0.94);
+            transform: translateY(24px) scale(0.94);
+            filter: blur(8px);
         }
-        to {
+        100% {
             opacity: 1;
             transform: translateY(0) scale(1);
+            filter: blur(0);
         }
     }
 
-    @keyframes sahilMoonFloat {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-7px); }
+    @keyframes secretStarsDrift {
+        from { transform: rotate(0deg) translateY(0); }
+        to { transform: rotate(8deg) translateY(-22px); }
+    }
+
+    @keyframes secretNebulaPulse {
+        0%, 100% { opacity: 0.55; transform: scale(0.92); }
+        50% { opacity: 1; transform: scale(1.08); }
+    }
+
+    @keyframes secretMoonFloat {
+        0%, 100% { transform: translateY(0) rotate(-5deg); }
+        50% { transform: translateY(-6px) rotate(5deg); }
+    }
+
+    @keyframes secretSparkle {
+        0%, 100% { opacity: 0.35; transform: scale(0.8); }
+        50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    @keyframes secretGlassSweep {
+        0%, 72%, 100% { left: -85%; }
+        35% { left: 140%; }
+    }
+
+    @media (max-width: 420px) {
+        .sahil-secret-card {
+            padding: 37px 23px 27px;
+            border-radius: 26px;
+        }
+
+        .sahil-secret-art {
+            width: 126px;
+            height: 126px;
+            margin-bottom: 21px;
+        }
+
+        .sahil-secret-moon {
+            width: 78px;
+            height: 78px;
+            font-size: 47px;
+        }
+
+        .sahil-secret-footer {
+            letter-spacing: 1.4px;
+        }
     }
 
     @media (prefers-reduced-motion: reduce) {
         #sahil-secret-room,
+        #sahil-secret-room::before,
+        #sahil-secret-room::after,
         .sahil-secret-card,
-        .sahil-secret-moon {
+        .sahil-secret-moon,
+        .sahil-secret-spark {
             animation: none !important;
         }
 
-        .sahil-secret-close {
+        .sahil-secret-close,
+        .sahil-secret-dismiss {
             transition: none !important;
         }
     }
@@ -1793,18 +2077,36 @@ window.addEventListener("load", function () {
             aria-label="Close secret room"
         >×</button>
 
-        <div class="sahil-secret-moon" aria-hidden="true">🌙</div>
+        <div class="sahil-secret-art" aria-hidden="true">
+            <div class="sahil-secret-orbit"></div>
+            <div class="sahil-secret-orbit-two"></div>
+            <div class="sahil-secret-moon">🌙</div>
+            <span class="sahil-secret-spark sahil-secret-spark-one">✦</span>
+            <span class="sahil-secret-spark sahil-secret-spark-two">✧</span>
+            <span class="sahil-secret-spark sahil-secret-spark-three">✦</span>
+        </div>
 
-        <p class="sahil-secret-label">A little secret by Sahil</p>
+        <p class="sahil-secret-label">Sahil Shrey · Hidden Chapter</p>
 
-        <p
-            class="sahil-secret-message"
-            id="sahil-secret-message"
-        >Some things are meant to be discovered, not explained. 🌙</p>
+        <div class="sahil-secret-divider" aria-hidden="true">✦</div>
+
+        <p class="sahil-secret-message" id="sahil-secret-message">
+            Some things are meant to be discovered, not explained.
+            <span>🌙</span>
+        </p>
 
         <p class="sahil-secret-footer" id="sahil-secret-footer">
-            ✦ You found what was hidden ✦
+            A little universe, just for the curious
         </p>
+
+        <button
+            class="sahil-secret-dismiss"
+            id="sahil-secret-dismiss"
+            type="button"
+        >
+            <span aria-hidden="true">✧</span>
+            Keep exploring
+        </button>
     </div>
 </div>
 
@@ -1813,8 +2115,11 @@ window.addEventListener("load", function () {
     const profilePhoto = document.querySelector(".profile-img");
     const secretRoom = document.getElementById("sahil-secret-room");
     const closeButton = document.getElementById("sahil-secret-close");
+    const dismissButton = document.getElementById("sahil-secret-dismiss");
 
-    if (!profilePhoto || !secretRoom || !closeButton) return;
+    if (!profilePhoto || !secretRoom || !closeButton || !dismissButton) {
+        return;
+    }
 
     let tapCount = 0;
     let resetTimer = null;
@@ -1829,6 +2134,8 @@ window.addEventListener("load", function () {
     }
 
     function closeSecretRoom() {
+        if (!roomOpen) return;
+
         secretRoom.hidden = true;
         roomOpen = false;
         profilePhoto.focus({ preventScroll: true });
@@ -1838,7 +2145,6 @@ window.addEventListener("load", function () {
         if (roomOpen) return;
 
         tapCount += 1;
-
         clearTimeout(resetTimer);
 
         if (tapCount >= 5) {
@@ -1853,6 +2159,7 @@ window.addEventListener("load", function () {
     });
 
     closeButton.addEventListener("click", closeSecretRoom);
+    dismissButton.addEventListener("click", closeSecretRoom);
 
     secretRoom.addEventListener("click", function (event) {
         if (event.target === secretRoom) {
@@ -1867,8 +2174,7 @@ window.addEventListener("load", function () {
     });
 })();
 </script>
-<!-- END SAHIL'S SECRET EASTER EGG -->
-  
-  
+<!-- END SAHIL'S PREMIUM SECRET EASTER EGG -->
+
 </body>
 </html>
